@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import Values from 'values.js'
-import Hero from './Hero';
 import { MdContentCopy } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
-
-
-//toast
 import { toast } from 'react-toastify';
+import isHexcolor from 'is-hexcolor';
+import Values from 'values.js';
+
+import Hero from './Hero';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader2 from './Loader2';
 
 
 function copyColor(color) {
+  const rgbToHex = (rgb) => '#' + rgb.match(/\d+/g).map(Number).map(val => Math.min(255, Math.max(0, val)).toString(16).padStart(2, '0')).join('');
+  color = rgbToHex(color);
   navigator.clipboard.writeText(color);
   toast.success(`${color} copied`, {
     position: "bottom-right",
@@ -24,46 +26,86 @@ function copyColor(color) {
   });
 }
 
+// tint box component
+const TintColor = ({ rgb, weight }) => {
+  return (
+    <div className='tint-color' style={{ backgroundColor: `${rgb}`, border:"2px solid black" }} >
+      <MdContentCopy className='copy-icon' size={24} onClick={() => copyColor(rgb)} />
+      <div className="data">
+        weight: {weight}
+      </div>
+    </div>
+  )
+}
+
+// shade box component
+const ShadeColor = ({ rgb, weight }) => {
+  return (
+    <div className='shade-color' style={{ backgroundColor: `${rgb}`, border:"2px solid black"  }} >
+      <MdContentCopy className='copy-icon' size={24} onClick={() => copyColor(rgb)} />
+      <div className="data">
+        weight: {weight}
+      </div>
+    </div>
+  )
+}
+
 const Tint = () => {
   const colorHex = useParams().colorHex;
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, []);
+
 
   const [tintNumber, setTintNumber] = useState(24);
   const [shadeNumber, setShadeNumber] = useState(24);
   const [color, setColor] = useState(`#${colorHex}`);
+  const [inputColor, setInputColor] = useState(`#${colorHex}`);
   const [tintList, setTintList] = useState(new Values(color).tints(Math.floor(100 / tintNumber)));
   const [shadeList, setShadeList] = useState(new Values(color).shades(Math.floor(100 / shadeNumber)));
 
   const handleTintShade = (e) => {
     e.preventDefault();
-
     setTintList(new Values(color).tints(Math.floor(100 / tintNumber)));
     setShadeList(new Values(color).shades(Math.floor(100 / shadeNumber)));
-
-    // console.log(color);
-    // console.log(tintList);
-    // console.log(shadeList);
   }
 
   useEffect(() => {
     setTintList(new Values(color).tints(Math.floor(100 / tintNumber)));
     setShadeList(new Values(color).shades(Math.floor(100 / shadeNumber)));
-
-    // console.log(color);
-    // console.log(tintList);
-    // console.log(shadeList);
+    console.log(tintNumber, shadeNumber, color);
   }, [tintNumber, shadeNumber, color])
 
+  const inputHexCodeHandleChange = (e) => {
+    let  color  =  e.target.value;
+    if (isHexcolor(color) && color.length === 7 || color==="#000" || color==="#fff") {
+      e.target.style.border= "1px solid green";
+      setColor(color)
+    }
+    else {
+      e.target.style.border= "1px solid red";
+    }
+    setInputColor(color);
+  }
 
   return (
-    <div className='tint-shade-container'>
+    <>
+    {loading ? (
+      <Loader2 />
+    ) : (
+      <div className='tint-shade-container'>
       <Hero
         heading={"Tint and Shade Generator"}
         para1={"Generate color shades online."}
         para2={"Enter Hex code or pick color and get different tint and shades"} />
 
       <form onSubmit={handleTintShade}>
-        <input type="color" className='input-color' value={color} onChange={e => setColor(e.target.value)} />
-        <input type="text" value={color} onChange={e => (e.target.value)} className='input-text' />
+        <input type="color" className='input-color' value={color} onChange={e => {setColor(e.target.value); setInputColor(e.target.value)}} />
+        <input type="text" value={inputColor} onChange={inputHexCodeHandleChange} className='input-text' />
         {/* <input type="submit" value="Submit" className="input-btn" /> */}
       </form>
 
@@ -114,31 +156,10 @@ const Tint = () => {
         </div>
       </div>
     </div>
+    )}
+  </>
+  
   )
 }
 
 export default Tint
-
-// tint box component
-const TintColor = ({ rgb, weight }) => {
-  return (
-    <div className='tint-color' style={{ backgroundColor: `${rgb}` }} >
-      <MdContentCopy className='copy-icon' size={24} onClick={() => copyColor(rgb)} />
-      <div className="data">
-        weight: {weight}
-      </div>
-    </div>
-  )
-}
-
-// shade box component
-const ShadeColor = ({ rgb, weight }) => {
-  return (
-    <div className='shade-color' style={{ backgroundColor: `${rgb}` }} >
-      <MdContentCopy className='copy-icon' size={24} onClick={() => copyColor(rgb)} />
-      <div className="data">
-        weight: {weight}
-      </div>
-    </div>
-  )
-}

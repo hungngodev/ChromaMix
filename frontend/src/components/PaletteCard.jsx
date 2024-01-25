@@ -1,6 +1,5 @@
 import React from 'react'
 import { FaRegHeart } from 'react-icons/fa'
-// import { BsThreeDots } from 'react-icons/bs'
 import { BiZoomIn } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
@@ -8,7 +7,6 @@ import { buttonVariants } from '../utils/Variants'
 import { MdContentCopy } from 'react-icons/md';
 import { WiMoonAltThirdQuarter } from 'react-icons/wi';
 
-//toast
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

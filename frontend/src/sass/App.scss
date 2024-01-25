@@ -1,5 +1,5 @@
-@import 'frequent';
-@import 'variables';
+@import "frequent";
+@import "variables";
 
 * {
   margin: 0;
@@ -12,33 +12,30 @@
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #a4a4a4;
 }
-
 
 a {
   text-decoration: none;
   color: $primary;
 }
 
-
 .App {
   transition: $transition;
   @include flexBox;
   height: 100%;
-
 
   // navigation
   .navigation {
@@ -57,7 +54,7 @@ a {
       ul {
         @include flexBox($colGap: 1rem);
 
-        >li {
+        > li {
           list-style: none;
           font-size: 0.8rem;
 
@@ -79,13 +76,91 @@ a {
         }
       }
     }
+    //progress bar
 
     #progress-bar {
       --progress: 0;
-      height: 5px;
+      height: 20px;
       width: var(--progress);
       background-color: $primary;
-      border-radius:3px ;
+      border-radius: 3px;
+      position: relative;
+      z-index: 4;
+    }
+
+    #progress-bar2 {
+      --progress: 0;
+      position: relative;
+      bottom: 20px;
+      height: 20px;
+      width: 100%;
+      background-color: #fff;
+      border-radius: 3px;
+      z-index: 3;
+    }
+
+    //waves
+
+    .waves-container {
+      position: relative;
+      bottom: 20px;
+      text-align: center;
+      background: linear-gradient(
+        60deg,
+        rgba(84, 58, 183, 1) 0%,
+        rgba(0, 172, 193, 1) 100%
+      );
+      color: white;
+    }
+    .waves {
+      position: relative;
+      width: 100%;
+      height: 15vh;
+      margin-bottom: -7px; /*Fix for safari gap*/
+      min-height: 100px;
+      max-height: 150px;
+    }
+    .parallax > use {
+      animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+    }
+    .parallax > use:nth-child(1) {
+      animation-delay: -2s;
+      animation-duration: 7s;
+    }
+    .parallax > use:nth-child(2) {
+      animation-delay: -3s;
+      animation-duration: 10s;
+    }
+    .parallax > use:nth-child(3) {
+      animation-delay: -4s;
+      animation-duration: 13s;
+    }
+    .parallax > use:nth-child(4) {
+      animation-delay: -5s;
+      animation-duration: 20s;
+      position:relative;
+      z-index: -3;
+    }
+    @keyframes move-forever {
+      0% {
+        transform: translate3d(-90px, 0, 0);
+      }
+      100% {
+        transform: translate3d(85px, 0, 0);
+      }
+    }
+    /*Shrinking for mobile*/
+    @media (max-width: 768px) {
+      .waves {
+        height: 40px;
+        min-height: 40px;
+      }
+      .content {
+        height: 30vh;
+      }
+      h1 {
+        font-size: 24px;
+      }
     }
   }
 
@@ -94,13 +169,13 @@ a {
     margin: 4rem 0 3.5rem;
     text-align: center;
 
-    >h1 {
+    > h1 {
       font-weight: 600;
       font-size: 2rem;
       line-height: 2.2;
     }
 
-    >p {
+    > p {
       color: $textColorDark;
       font-size: 1rem;
       margin: 0 1rem;
@@ -146,7 +221,6 @@ a {
         animation-delay: 400ms;
       }
 
-
       @keyframes updown {
         100% {
           transform: translateY(2rem);
@@ -183,8 +257,6 @@ a {
     @include flexBox($flexDirection: row, $justifyContent: space-evenly);
     width: 100vw;
     background-color: $bg;
-    ;
-
     .top {
       @include flexBox($justifyContent: flex-start);
       font-size: 0.8rem;
@@ -247,13 +319,11 @@ a {
         transition: $transition;
         z-index: 1;
 
-
         &:hover .color-code,
         &:hover .icons {
           display: inline-block;
           color: $textColorLight;
         }
-
 
         .color-code {
           color: transparent;
@@ -399,7 +469,6 @@ a {
         &:hover a {
           color: $textColorDark;
         }
-
       }
     }
   }
@@ -421,7 +490,6 @@ a {
       margin-right: 2rem;
       font-size: 1rem;
       border-radius: 5px;
-
     }
 
     .palette-zoom {
@@ -436,7 +504,7 @@ a {
         color: $textColorDark;
         flex: 1 1 0;
 
-        >p {
+        > p {
           @include flexBox($colGap: 0, $rowGap: 0);
           color: $textColorLight;
           margin-top: 0.5rem;
@@ -462,7 +530,6 @@ a {
             list-style: none;
             display: inline;
 
-
             svg {
               transition: $transition;
               margin: 0.5rem 0;
@@ -478,10 +545,8 @@ a {
         &:hover .toolbar {
           display: block;
         }
-
       }
     }
-
   }
 
   // home
@@ -508,10 +573,8 @@ a {
     }
   }
 
-
   //shade and tint page
   .tint-shade-container {
-
     form {
       @include flexBox($colGap: 0.5rem);
       // display: flex;
@@ -563,9 +626,7 @@ a {
         cursor: pointer;
       }
 
-
       //second form
-
     }
 
     .set-tint-shade-count {
@@ -574,7 +635,12 @@ a {
 
       .tint-count,
       .shade-count {
-        @include flexBox($flexDirection: row, $justifyContent: space-between, $colGap: -1rem, $rowGap: 0);
+        @include flexBox(
+          $flexDirection: row,
+          $justifyContent: space-between,
+          $colGap: -1rem,
+          $rowGap: 0
+        );
         min-width: 15rem;
 
         label {
@@ -593,7 +659,6 @@ a {
           &:focus {
             border: 2px solid $primary;
           }
-
         }
       }
     }
@@ -628,7 +693,6 @@ a {
             color: $textColorDark;
             display: none;
             cursor: pointer;
-
           }
 
           .data {
@@ -684,14 +748,11 @@ a {
             display: block;
           }
 
-
           &:hover {
             box-shadow: $boxShadow2;
           }
         }
-
       }
-
     }
   }
 }
@@ -699,15 +760,18 @@ a {
 // media queries
 
 @media only screen and (max-width: 980px) {
-
   .App {
     .palette-container {
       .palette-zoom {
-        @include flexBox($flexDirection: column, $colGap: 0, $rowGap: 0, $alignItems: stretch);
+        @include flexBox(
+          $flexDirection: column,
+          $colGap: 0,
+          $rowGap: 0,
+          $alignItems: stretch
+        );
         width: 100vw;
 
         .zoom-palette-color {
-
           .options {
             @include flexBox;
             transition: $transition;
