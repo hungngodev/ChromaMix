@@ -82,7 +82,7 @@ const Tint = () => {
 
   const inputHexCodeHandleChange = (e) => {
     let  color  =  e.target.value;
-    if (isHexcolor(color) && color.length === 7 || color==="#000" || color==="#fff") {
+    if ((isHexcolor(color) && color.length === 7) || color==="#000" || color==="#fff") {
       e.target.style.border= "1px solid green";
       setColor(color)
     }

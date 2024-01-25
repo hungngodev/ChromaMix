@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineUndo } from "react-icons/ai";
+import { MdExpandLess } from "react-icons/md";
 import { motion } from "framer-motion";
 
 import Hero from "./Hero";
@@ -12,15 +13,40 @@ const Home = () => {
   const [visibleItems, setVisibleItems] = useState(16);
   const [loading, setLoading] = useState(true);
 
+  const onmouseclick= function (e) {
+    const y1 = JSON.parse(localStorage.getItem("y"));
+    console.log(y1);
+    var y = e.pageY;
+    localStorage.setItem("y", JSON.stringify(y));
+  };
+
   useEffect(() => {
+    const currentItems = JSON.parse(localStorage.getItem("visibleItems"));
+    setVisibleItems(currentItems);
+    window.addEventListener('click', onmouseclick);
     setTimeout(() => {
       setLoading(false);
     }, 500);
   }, []);
 
+  useEffect(() => {
+    const y = JSON.parse(localStorage.getItem("y"));
+    window.scrollTo(0, y-500);
+  });
+
+  useEffect(() => {
+    window.scrollTo(0, visibleItems*110);
+    localStorage.setItem("visibleItems", JSON.stringify(visibleItems));
+  }, [visibleItems]);
+
   const loadmore = () => {
-    setVisibleItems((prev) => prev + 4);
+    setVisibleItems((prev) => prev + 10);
   };
+
+  const loadless = () => {
+    setVisibleItems((prev) => prev - 10);
+  };
+
   return (
     <>
       {loading ? (
@@ -41,22 +67,31 @@ const Home = () => {
             initial="hidden"
             animate="visible"
           >
-            {ColorPaletteData.slice(0, visibleItems).map((colorPalette) => {
+            {ColorPaletteData.slice(0, visibleItems).map((colorPalette, index) => {
               return (
+                <div className= "palette-container">
+                    <h1>{index}</h1>
                 <PaletteCard
                   key={colorPalette.id}
                   data={colorPalette}
                   className="palette-box"
                 />
+                </div>
               );
             })}
           </motion.div>
-
-          {ColorPaletteData.length >= visibleItems && (
-            <button onClick={loadmore} className="load-more-btn">
-              Load More <AiOutlineUndo size={20} color={"#555"} />
-            </button>
-          )}
+          <div className="adjust">
+            {ColorPaletteData.length >= visibleItems && visibleItems >= 10 && (
+              <button onClick={loadless} className="load-btn">
+                Show Less <MdExpandLess size={20} color={"#555"} />
+              </button>
+            )}
+            {ColorPaletteData.length >= visibleItems && (
+              <button onClick={loadmore} className="load-btn">
+                Load More <AiOutlineUndo size={20} color={"#555"} />
+              </button>
+            )}
+          </div>
         </div>
       )}
     </>
