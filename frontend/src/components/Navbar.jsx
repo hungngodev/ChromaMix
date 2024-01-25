@@ -48,7 +48,6 @@ const Header = () => {
               </motion.g>
             </motion.svg>
           </NavLink>
-   
           <ul>
             <li>
               <NavLink
@@ -57,7 +56,7 @@ const Header = () => {
                   isActive ? "navlink-active" : null
                 }
               >
-                Home
+                <h6>Home</h6>
               </NavLink>
             </li>
             {/* <li><NavLink to='/solid-color' className={({ isActive }) => (isActive ? 'navlink-active' : null)}>Solid Colors</NavLink></li> */}
@@ -70,7 +69,7 @@ const Header = () => {
                   isActive ? "navlink-active" : null
                 }
               >
-                Tint & Shade Generator
+                <h6>Tint & Shade Generator</h6>
               </NavLink>
             </li>
           </ul>
