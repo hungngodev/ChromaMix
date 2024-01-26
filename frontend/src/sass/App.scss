@@ -162,14 +162,17 @@ a {
     text-align: center;
 
     > h1 {
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
       font-weight: 600;
-      font-size: 2rem;
-      line-height: 2.2;
+      color : $primary;
+      font-size: 4rem;
+      line-height: 3;
     }
 
     > p {
       color: $textColorDark;
-      font-size: 1rem;
+      font-size: 2rem;
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0 1rem;
     }
   }
@@ -251,18 +254,19 @@ a {
     background-color: $bg;
     .top {
       @include flexBox($justifyContent: flex-start);
-      font-size: 0.8rem;
 
       h1 {
         font-weight: 600;
-        font-size: 1.3rem;
         text-transform: uppercase;
+      }
+      p{
+        font-size: 1.5rem;
       }
     }
 
     .bottom {
       @include flexBox($justifyContent: flex-end, $colGap: 0rem);
-      font-size: 0.8rem;
+      font-size: 1rem;
       transition: $transition;
 
       .links {
@@ -274,12 +278,12 @@ a {
           @include flexBox();
           transition: $transition;
           border-radius: 50%;
-          width: 2rem;
-          height: 2rem;
 
           .footer-icons {
             color: $textColorDark;
             transition: $transition;
+            width: 2rem;
+            height: 2rem;
           }
 
           &:hover {
@@ -608,8 +612,8 @@ a {
       // column-gap: 0.51rem;
 
       .input-color {
-        width: 2.25rem;
-        height: 2.25rem;
+        width: 4rem;
+        height: 4rem;
         border-radius: 50%;
         overflow: hidden;
         border: none;
@@ -632,7 +636,8 @@ a {
         border: 2px solid rgba(29, 29, 29, 0.288);
         border-radius: 5px;
         padding: 0.5rem 1rem;
-        min-width: 40%;
+        min-width: 50vw;
+        font-size: 2rem;
         outline: none;
 
         &:active,
@@ -657,6 +662,7 @@ a {
     .set-tint-shade-count {
       @include flexBox;
       margin-top: 2rem;
+      font-size: 3rem;
 
       .tint-count,
       .shade-count {
@@ -666,18 +672,19 @@ a {
           $colGap: -1rem,
           $rowGap: 0
         );
-        min-width: 15rem;
+        min-width: 25rem;
 
         label {
-          font-size: 0.8rem;
+          font-size: 1.5rem;
         }
 
         .input-number {
           border: 2px solid rgba(29, 29, 29, 0.288);
           border-radius: 5px;
           padding: 0.5rem 1rem;
-          max-width: 4.5rem;
+          min-width: 5vw;
           outline: none;
+          font-size: 1.5rem;
 
           &:active,
           &:focus-within,
