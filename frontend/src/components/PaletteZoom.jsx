@@ -45,7 +45,7 @@ const Toolbar = ({
             }
           }}
           color={"white"}
-          size={20}
+          size={50}
         />
       </li>
       <li>
@@ -54,19 +54,19 @@ const Toolbar = ({
             setFilterColorsArray(colorsArray);
           }}
           color={"white"}
-          size={20}
+          size={50}
         />
       </li>
       <li>
         <Link to={`/tint-and-shade-generator/${color.slice(1, 7)}`}>
-          <WiMoonAltThirdQuarter color={"white"} size={20} />
+          <WiMoonAltThirdQuarter color={"white"} size={50} />
         </Link>
       </li>
       <li>
         <MdContentCopy
           onClick={() => copyColor(color)}
           color={"white"}
-          size={20}
+          size={50}
         />
       </li>
     </ul>
@@ -90,7 +90,7 @@ const PaletteZoom = () => {
     <div className="palette-container">
       <p>{colorData.title}</p>
       <div className="likes">
-        <AiOutlineHeart size={20} />
+        <AiOutlineHeart size={50} />
         <p>{colorData.likes}</p>
       </div>
 

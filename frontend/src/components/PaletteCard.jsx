@@ -42,11 +42,11 @@ const PaletteCard = (props) => {
               </div>
               <div className="icons">
                 <Link to={`/tint-and-shade-generator/${color.slice(1, 7)}`}>
-                  <WiMoonAltThirdQuarter size={18} className="tintshade" />
+                  <WiMoonAltThirdQuarter size={30} className="tintshade" />
                 </Link>
                 <MdContentCopy
                   className="copy"
-                  size={18}
+                  size={30}
                   onClick={() => copyColor(color)}
                 />
               </div>
@@ -56,11 +56,11 @@ const PaletteCard = (props) => {
       </div>
       <div className="palette-bottom">
         <button>
-          <FaRegHeart size={15} /> <p>{props.data.likes}</p>
+          <FaRegHeart size={30} /> <p>{props.data.likes}</p>
         </button>
         <Link to={`/palette/${props.data.id}`}>
           <button className="more-info">
-            <BiZoomIn className="more-info" size={16} />
+            <BiZoomIn className="more-info" size={30} />
           </button>
         </Link>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { AiOutlineUndo } from "react-icons/ai";
 import { MdExpandLess } from "react-icons/md";
 import { motion } from "framer-motion";
@@ -12,6 +12,7 @@ import Loader from "./Loader";
 const Home = () => {
   const [visibleItems, setVisibleItems] = useState(16);
   const [loading, setLoading] = useState(true);
+  const LoadButtonRef = useRef(null);
 
   const onmouseclick= function (e) {
     const y1 = JSON.parse(localStorage.getItem("y"));
@@ -31,11 +32,12 @@ const Home = () => {
 
   useEffect(() => {
     const y = JSON.parse(localStorage.getItem("y"));
-    window.scrollTo(0, y-500);
+    window.scrollTo(0, y-1000);
   });
 
   useEffect(() => {
-    window.scrollTo(0, visibleItems*110);
+    LoadButtonRef.current?.scrollIntoView({ behavior: "smooth" });
+    console.log(window.innerHeight)
     localStorage.setItem("visibleItems", JSON.stringify(visibleItems));
   }, [visibleItems]);
 
@@ -82,12 +84,12 @@ const Home = () => {
           </motion.div>
           <div className="adjust">
             {ColorPaletteData.length >= visibleItems && visibleItems >= 10 && (
-              <button onClick={loadless} className="load-btn">
+              <button onClick={loadless} ref = {LoadButtonRef} className="load-btn">
                 Show Less <MdExpandLess size={20} color={"#555"} />
               </button>
             )}
             {ColorPaletteData.length >= visibleItems && (
-              <button onClick={loadmore} className="load-btn">
+              <button onClick={loadmore} ref = {LoadButtonRef} className="load-btn">
                 Load More <AiOutlineUndo size={20} color={"#555"} />
               </button>
             )}
