@@ -32,7 +32,7 @@ const Home = () => {
 
   useEffect(() => {
     const y = JSON.parse(localStorage.getItem("y"));
-    window.scrollTo(0, y-1000);
+    window.scrollTo(0, y-850);
   });
 
   useEffect(() => {
