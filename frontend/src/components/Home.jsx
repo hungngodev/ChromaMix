@@ -23,7 +23,7 @@ const Home = () => {
 
   useEffect(() => {
     const currentItems = JSON.parse(localStorage.getItem("visibleItems"));
-    setVisibleItems(currentItems);
+    setVisibleItems(currentItems > 16 ? currentItems : 16);
     window.addEventListener('click', onmouseclick);
     setTimeout(() => {
       setLoading(false);
