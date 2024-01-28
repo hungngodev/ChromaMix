@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/ChromaMix/static/css/main.40997515.css",
-    "main.js": "/ChromaMix/static/js/main.5ae3a201.js",
+    "main.css": "/ChromaMix/static/css/main.032bfce4.css",
+    "main.js": "/ChromaMix/static/js/main.8506d490.js",
     "index.html": "/ChromaMix/index.html",
-    "main.40997515.css.map": "/ChromaMix/static/css/main.40997515.css.map",
-    "main.5ae3a201.js.map": "/ChromaMix/static/js/main.5ae3a201.js.map"
+    "main.032bfce4.css.map": "/ChromaMix/static/css/main.032bfce4.css.map",
+    "main.8506d490.js.map": "/ChromaMix/static/js/main.8506d490.js.map"
   },
   "entrypoints": [
-    "static/css/main.40997515.css",
-    "static/js/main.5ae3a201.js"
+    "static/css/main.032bfce4.css",
+    "static/js/main.8506d490.js"
   ]
 }
